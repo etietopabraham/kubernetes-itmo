@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: eabraham-373705
+  name: lab0-jupyter
+  labels:
+    jupyter: lab0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      jupyter: lab0
+  template:
+    metadata:
+      labels:
+        jupyter: lab0
+    spec:
+      containers:
+      - name: jupyter-container
+        image: node03.st:5000/pyspark-hdfs-jupyter:eabraham-373705
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "1"
+            memory: "2Gi"
+          requests:
+            cpu: "1"
+            memory: "2Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lab0-jupyter-service
+  namespace: eabraham-373705
+spec:
+  type: NodePort
+  selector:
+    jupyter: lab0
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
