@@ -19,7 +19,8 @@ spec:
       - name: jupyter-container
         image: node03.st:5000/pyspark-hdfs-jupyter:eabraham-373705
         ports:
-        - containerPort: 8080
+        - containerPort: 8282
+        args: ["--port", "8282", "--NotebookApp.token", "pass1word"]
         resources:
           limits:
             cpu: "1"
@@ -40,4 +41,4 @@ spec:
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 8080
+    targetPort: 8282
