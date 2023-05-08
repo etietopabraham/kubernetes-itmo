@@ -20,7 +20,7 @@ spec:
         image: node03.st:5000/pyspark-hdfs-jupyter:eabraham-373705
         ports:
         - containerPort: 8282
-        args: ["jupyter", "notebook", "--port", "8282", "--NotebookApp.token='pass1word'"]
+        args: ["jupyter", "notebook", "--port", "8282", "--NotebookApp.token=89o86ZC8XB"]
 
         resources:
           limits:
@@ -44,6 +44,8 @@ kind: Service
 metadata:
   name: lab0-jupyter-service
   namespace: eabraham-373705
+  labels:
+        jupyter: lab0
 spec:
   type: NodePort
   selector:
